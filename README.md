@@ -1,0 +1,1 @@
+Automating the github commits 
