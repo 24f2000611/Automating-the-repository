@@ -7,14 +7,18 @@ jobs:
   commit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repo
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+    
     - name: Update status by 24f2000611@ds.study.iitm.ac.in
       run: echo "Last updated: $(date)" > status.txt
-    - run: |
-        git config user.name github-actions[bot]
-        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+    
+    - name: Commit changes
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add status.txt
         git commit -m "Daily update: $(date)" || exit 0
         git push
